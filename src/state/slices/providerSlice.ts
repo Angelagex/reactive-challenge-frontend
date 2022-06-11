@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Provider {
-    id: String,
+    id?: String,
     providerId: String,
     name: String
 }
@@ -24,20 +24,16 @@ export const providerSlice = createSlice({
     name: "producers",
     initialState,
     reducers: {
-        getAllProviders: (state: ProviderState, action: PayloadAction<Provider[]>) => {
-            return { ...state, providers: action.payload }
-        },
-        addProvider: (state: ProviderState, action: PayloadAction<Provider>)  => {
-            const newProviders = [...state.providers, action.payload]
-            return { ...state, providers: newProviders }
-        },
-        deleteProvider: (state: ProviderState, action: PayloadAction<Provider>) => {
-            const newProviders = state.providers.filter(provider => provider.id != action.payload.id)
-            return { ...state, providers: newProviders }
-        },
-
+        getAllProviders: (state: ProviderState, action: PayloadAction<Provider[]>) => (
+            {...state, providers: action.payload}
+        ),
+        addProvider: (state: ProviderState, action: PayloadAction<Provider>)  => (
+             {...state, providers: [...state.providers, action.payload]} 
+        ),
+        deleteProvider: (state: ProviderState, action: PayloadAction<Provider>) => (
+             { ...state, providers: [...state.providers.filter(provider => provider.id != action.payload.id)]}
+        ),
     }
-
 })
  
 export const { addProvider, deleteProvider, getAllProviders } = providerSlice.actions
