@@ -19,7 +19,7 @@ const AppNavbar: React.FunctionComponent<INavbarProps> = () => {
     <Container>
     <Navbar.Brand href="#home">Don Raul's Hardware Store</Navbar.Brand>
     <Nav className="mr-auto">
-      <Nav.Link href="/">Stock</Nav.Link>
+      <Nav.Link href="/stock">Stock</Nav.Link>
       <Nav.Link href="/providers">Providers</Nav.Link>
       <Nav.Link href="/bills">Bills</Nav.Link>
       <Nav.Link href="/receipts">Receipts</Nav.Link>

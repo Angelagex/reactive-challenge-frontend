@@ -1,12 +1,10 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import  {bringProvidersHandler, deleteProviderHandler}  from "../actions/providerActions";
+import  {bringProvidersHandler, deleteProviderHandler}  from "../../actions/providerActions";
 import {
-  deleteProvider,
-  getAllProviders,
   Provider,
-} from "../state/slices/providerSlice";
-import { RootState } from "../state/Store";
+} from "../../state/slices/providerSlice";
+import { RootState } from "../../state/Store";
 
 interface IProviderListProps {}
 

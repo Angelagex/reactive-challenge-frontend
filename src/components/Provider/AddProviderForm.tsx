@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addProvider, Provider } from "../state/slices/providerSlice";
-import {saveProviderHandler}  from "../actions/providerActions";
+import {saveProviderHandler}  from "../../actions/providerActions";
 
 interface IAddProviderFormProps {}
 

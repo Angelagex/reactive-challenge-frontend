@@ -1,9 +1,8 @@
 import * as React from "react";
-import AddProviderForm from "../components/AddProviderForm";
-import ProviderList from "../components/ProviderList";
+import AddProviderForm from "../components/Provider/AddProviderForm";
+import ProviderList from "../components/Provider/ProviderList";
 
-interface IProvidersPageProps {
-}
+interface IProvidersPageProps {}
 
 const ProvidersPage: React.FunctionComponent<IProvidersPageProps> = () => {
   return (
@@ -13,4 +12,4 @@ const ProvidersPage: React.FunctionComponent<IProvidersPageProps> = () => {
     </div>
   );
 };
-export default ProvidersPage;
+export default ProvidersPage
