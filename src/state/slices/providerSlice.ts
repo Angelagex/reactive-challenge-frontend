@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Provider {
+export interface Provider {
     id: String,
     providerId: String,
     name: String
@@ -24,14 +24,14 @@ export const providerSlice = createSlice({
     name: "producers",
     initialState,
     reducers: {
-        getAllProviders: (state, action: PayloadAction<Provider[]>) => {
+        getAllProviders: (state: ProviderState, action: PayloadAction<Provider[]>) => {
             return { ...state, providers: action.payload }
         },
-        addProvider: (state, action: PayloadAction<Provider>) => {
-            const newProviders = state.providers.push(action.payload)
-            return { ...state, newProviders }
+        addProvider: (state: ProviderState, action: PayloadAction<Provider>)  => {
+            const newProviders = [...state.providers, action.payload]
+            return { ...state, providers: newProviders }
         },
-        deleteProvider: (state, action: PayloadAction<Provider>) => {
+        deleteProvider: (state: ProviderState, action: PayloadAction<Provider>) => {
             const newProviders = state.providers.filter(provider => provider.id != action.payload.id)
             return { ...state, providers: newProviders }
         },
@@ -39,7 +39,6 @@ export const providerSlice = createSlice({
     }
 
 })
-
+ 
 export const { addProvider, deleteProvider, getAllProviders } = providerSlice.actions
-
 export default providerSlice.reducer

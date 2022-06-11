@@ -1,16 +1,17 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import ProviderList from '../components/ProviderList'
-import '../styles/App.css'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AppNavbar from "../components/AppNavbar";
+import ProvidersPage from "../pages/ProvidersPage";
+import "../styles/App.css";
 
 function App() {
-
   return (
     <div className="App">
-        <Routes>
-          <Route path='/' element= {<ProviderList />}/>
-        </Routes>
+      <AppNavbar />
+      <Routes>
+        <Route path="/" element={<ProvidersPage />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

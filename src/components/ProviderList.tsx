@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
+import { getAllProviders } from "../state/slices/providerSlice";
 import { RootState } from "../state/Store";
 
 interface IProviderListProps {
@@ -7,6 +8,10 @@ interface IProviderListProps {
 
 const ProviderList: React.FunctionComponent<IProviderListProps> = () => {
   const providers = useSelector((state: RootState) => state.provider.providers);
+
+  React.useEffect(() => {
+
+  }, [providers])
 
   return (
     <div>
