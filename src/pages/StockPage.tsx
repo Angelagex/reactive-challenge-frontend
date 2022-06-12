@@ -7,6 +7,7 @@ interface IStockPageProps {}
 const StockPage: React.FunctionComponent<IStockPageProps> = () => {
   return (
     <div>
+      <h1>Stock</h1>
       <AddProductForm />
       <ProductList />
     </div>

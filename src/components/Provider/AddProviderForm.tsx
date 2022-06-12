@@ -36,7 +36,7 @@ const AddProviderForm: React.FunctionComponent<IAddProviderFormProps> = () => {
         </Modal.Header>
         <form onSubmit={(e) => handleSave(e)}>
           <Modal.Body>
-            <label className="titleLabel">Document</label>
+            <label className="formLabel">Document</label>
             <input
               id="providerId"
               type="text"
@@ -46,7 +46,7 @@ const AddProviderForm: React.FunctionComponent<IAddProviderFormProps> = () => {
               value={providerId}
               onChange={(e) => SetProviderId(e.target.value)}
             />
-            <label className="titleLabel">Name</label>
+            <label className="formLabel">Name</label>
             <input
               id="name"
               type="text"
