@@ -1,3 +1,4 @@
+import { AnyListenerPredicate } from "@reduxjs/toolkit/dist/listenerMiddleware/types";
 import * as React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,7 +80,6 @@ const AddProductForm: React.FunctionComponent<IAddProductFormProps> = () => {
               />
             </div>
             <div className="inputFormDiv">
-              {" "}
               <label className="formLabel">Price</label>
               <input
                 id="price"
@@ -101,7 +101,7 @@ const AddProductForm: React.FunctionComponent<IAddProductFormProps> = () => {
                 onSelect={(e) => setProvider(e.currentTarget.value)}
                 required
               >
-                {providers.map( (provider:Provider,idx) => (<option key={idx} value={provider.name.toString()}>{provider.name}</option>))}
+                {providers.map( (provider:Provider,idx:any) => (<option key={idx} value={provider.name.toString()}>{provider.name}</option>))}
                 
               </select>
             </div>
@@ -118,7 +118,6 @@ const AddProductForm: React.FunctionComponent<IAddProductFormProps> = () => {
                 required
               />
             </div>
-
             <div className="inputFormDiv">
               <label className="formLabel">MinAmount</label>
               <input

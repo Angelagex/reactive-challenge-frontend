@@ -2,19 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Product {
     id?: String,
-    name: String,
+    name: string,
     description: String,
     price: Number,
     provider: String,
     maxAmount: Number,
     minAmount: Number,
-    amount: Number
+    amount: number
 }
 
 interface ProductState {
     productToEdit: Product
     products: Product[]
     order: Product[]
+    receipt: Product[]
 }
 
 const initialState: ProductState = {
@@ -51,6 +52,18 @@ const initialState: ProductState = {
             minAmount: 10,
             amount: 0
         }
+    ],
+    receipt: [
+        {
+            id: "asd",
+            name: "Hammer",
+            description: "Common Hammer",
+            price: 10000,
+            provider: "Juan",
+            maxAmount: 50,
+            minAmount: 10,
+            amount: 0
+        }
     ]
 }
 
@@ -75,13 +88,36 @@ export const productSlice = createSlice({
             { ...state, order: action.payload }
         ),
         addProductToOrder: (state: ProductState, action: PayloadAction<Product>) => (
-            { ...state, order: [...state.products, action.payload] }
+            state.order.find(item => item.id == action.payload.id) == undefined
+            ? { ...state, order: [...state.order, action.payload] }
+            : {...state}
+        ),
+        updateProductToOrder: (state: ProductState, action: PayloadAction<Product>) => (
+            { ...state, order: [...state.order.filter(product => product.id != action.payload.id ?
+                product : action.payload)] }
         ),
         deleteProductInOrder: (state: ProductState, action: PayloadAction<Product>) => (
-            { ...state, order: [...state.products.filter(product => product.id != action.payload.id)] }
+            { ...state, order: [...state.order.filter(product => product.id != action.payload.id)] }
         ),
         clearOrder: (state: ProductState, action: PayloadAction<void>) => (
             { ...state, order: initialState.order }
+        ),
+        getReceipt: (state: ProductState, action: PayloadAction<Product[]>) => (
+            { ...state, receipt: action.payload }
+        ),
+        addProductToReceipt: (state: ProductState, action: PayloadAction<Product>) => (
+            state.receipt.find(item => item.id == action.payload.id) == undefined
+            ? { ...state, receipt: [...state.receipt, action.payload] }
+            : {...state}
+        ),
+        updateProductToReceipt: (state: ProductState, action: PayloadAction<Product>) => (
+            { ...state, receipt: [...state.receipt.filter(product => product.id != action.payload.id), action.payload] } 
+        ),
+        deleteProductInReceipt: (state: ProductState, action: PayloadAction<Product>) => (
+            { ...state, receipt: [...state.receipt.filter(product => product.id != action.payload.id)] }
+        ),
+        clearReceipt: (state: ProductState, action: PayloadAction<void>) => (
+            { ...state, receipt: initialState.order }
         ),
         updateProductToEdit: (state: ProductState, action: PayloadAction<Product>) => (
             { ...state, productToEdit: action.payload }
@@ -94,6 +130,8 @@ export const productSlice = createSlice({
 
 export const { addProduct, deleteProduct, getAllProducts, 
     addProductToOrder, clearOrder, clearProductToEdit, 
-    deleteProductInOrder, getOrder, updateProductToEdit, updateProduct } = productSlice.actions
+    deleteProductInOrder, getOrder, updateProductToEdit, updateProduct,
+    addProductToReceipt, clearReceipt, deleteProductInReceipt, getReceipt,
+    updateProductToOrder, updateProductToReceipt } = productSlice.actions
 
 export default productSlice.reducer

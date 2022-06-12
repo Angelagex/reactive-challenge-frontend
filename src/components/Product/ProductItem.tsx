@@ -1,21 +1,14 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { deleteProductHandler } from "../../actions/productActions";
-import { Product } from "../../state/slices/productSlice";
+import { addProductToOrder, addProductToReceipt, Product, productSlice } from "../../state/slices/productSlice";
 import { GiTrashCan, GiPencil, GiCheckMark } from "react-icons/gi";
 
 interface IProductItemProps {}
 
 const ProductItem: React.FunctionComponent<Product> = ({
-  id,
-  name,
-  description,
-  price,
-  amount,
-  maxAmount,
-  minAmount,
-  provider,
-}) => {
+  id, name, description, price, amount, maxAmount, minAmount, provider}) => {
+
   const [productAmount, setProductAmount] = React.useState<number>();
   const [productMaxAmount, setProductMaxAmount] = React.useState<number>();
 
@@ -24,20 +17,30 @@ const ProductItem: React.FunctionComponent<Product> = ({
     setProductMaxAmount(Number(maxAmount) - Number(productAmount));
   };
 
+  const product = {
+    id,
+    name,
+    description,
+    price,
+    amount,
+    maxAmount,
+    minAmount,
+    provider,
+  }
+
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    deleteProductHandler(dispatch, {
-      id,
-      name,
-      description,
-      price,
-      amount,
-      maxAmount,
-      minAmount,
-      provider,
-    });
+    deleteProductHandler(dispatch, product);
   };
+
+  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    dispatch(addProductToOrder({...product, amount: 1}))
+  }
+
+  const handleAddToReceipt = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    dispatch(addProductToReceipt({...product, amount: 1}))
+  }
 
   return (
     <div className="productDiv">
@@ -65,9 +68,9 @@ const ProductItem: React.FunctionComponent<Product> = ({
       <p className="productInStock">Units in stock: {amount.toString()}</p>
       <div className="productLowButtons">
         {amount != 0 && (
-          <button className="addToCartButton">Add To Cart</button>
+          <button className="addToCartButton" onClick={handleAddToCart}>Add To Cart</button>
         )}
-        <button className="buyMoreButton">Buy More</button>
+        <button className="buyMoreButton" onClick={handleAddToReceipt}>Buy More</button>
       </div>
     </div>
   );
