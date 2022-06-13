@@ -58,4 +58,4 @@ const deleteProductHandler = async (dispatch: AddDispatch, product: Product) => 
 }
 
 
-export {bringProductsHandler, saveProductHandler, deleteProductHandler }
+export {bringProductsHandler, saveProductHandler, deleteProductHandler, updateProductHandler }
