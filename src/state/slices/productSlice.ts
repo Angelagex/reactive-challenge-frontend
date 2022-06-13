@@ -53,18 +53,7 @@ const initialState: ProductState = {
             amount: 0
         }
     ],
-    receipt: [
-        {
-            id: "asd",
-            name: "Hammer",
-            description: "Common Hammer",
-            price: 10000,
-            provider: "Juan",
-            maxAmount: 50,
-            minAmount: 10,
-            amount: 0
-        }
-    ]
+    receipt: []
 }
 
 export const productSlice = createSlice({
@@ -110,9 +99,10 @@ export const productSlice = createSlice({
             ? { ...state, receipt: [...state.receipt, action.payload] }
             : {...state}
         ),
-        updateProductToReceipt: (state: ProductState, action: PayloadAction<Product>) => (
-            { ...state, receipt: [...state.receipt.filter(product => product.id != action.payload.id), action.payload] } 
-        ),
+        updateProductToReceipt: (state: ProductState, action: PayloadAction<Product>) => {
+            var idx = state.receipt.findIndex( item => item.id == action.payload.id)
+            state.receipt[idx].amount = action.payload.amount 
+        },
         deleteProductInReceipt: (state: ProductState, action: PayloadAction<Product>) => (
             { ...state, receipt: [...state.receipt.filter(product => product.id != action.payload.id)] }
         ),

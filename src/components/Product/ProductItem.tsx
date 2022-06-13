@@ -30,7 +30,7 @@ const ProductItem: React.FunctionComponent<Product> = ({
 
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
+  const handleDelete = () => {    
     deleteProductHandler(dispatch, product);
   };
 
@@ -47,9 +47,7 @@ const ProductItem: React.FunctionComponent<Product> = ({
       <div className="productTopButtons">
         <button
           className="deleteButton"
-          onClick={(e) => {
-            handleDelete;
-          }}
+          onClick={handleDelete}
         >
           <GiTrashCan
             onPointerEnter={(e) => (e.currentTarget.style.color = "red")}

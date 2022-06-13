@@ -11,22 +11,28 @@ interface IOffCanvasProps {}
 
 const OffCanvas: React.FunctionComponent<IOffCanvasProps> = () => {
   const [providerName, setProviderName] = React.useState("");
-  const [providerDocument, setProvider] = React.useState("");
+  const [providerDocument, setProviderDocument] = React.useState("");
 
   const [show, setShow] = React.useState(false);
   const providers = useSelector((state: RootState) => state.provider.providers);
   const products = useSelector((state: RootState) => state.product.receipt);
 
+  
   React.useEffect(() => {}, [products]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSave = ( e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+    console.log('asdas');
     console.log(products);
-    console.log(moment().format("YYY/MM/DD"));
+    console.log(moment().format("YYYY/MM/DD"));
   };
+  const handleProvider = (e: React.SyntheticEvent<HTMLSelectElement, Event>) => {
+    setProviderName(e.currentTarget.value)
+    setProviderDocument(e.currentTarget.id)
+  }
 
   return (
     <>
@@ -46,18 +52,18 @@ const OffCanvas: React.FunctionComponent<IOffCanvasProps> = () => {
           <Offcanvas.Title>New Receipt</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <form onSubmit={handleSave}>
+          <form>
             <div className="inputFormDiv">
               <label className="formLabel">Select a provider</label>
               <select
                 id="provider"
                 name="provider"
                 className="selectLabel"
-                onSelect={(e) => setProvider(e.currentTarget.value)}
+                onSelect={(e) => handleProvider(e)}
                 required
               >
                 {providers.map((provider: Provider, idx: any) => (
-                  <option key={idx} value={provider.name.toString()}>
+                  <option key={idx} id={provider.providerId.toString()} value={provider.name.toString()}>
                     {provider.name}
                   </option>
                 ))}
@@ -69,7 +75,7 @@ const OffCanvas: React.FunctionComponent<IOffCanvasProps> = () => {
               ))}
             </div>
 
-            <button>Create Receipt!</button>
+            <button onClick={(e) => {handleSave(e)}}>Create Receipt!</button>
           </form>
         </Offcanvas.Body>
       </Offcanvas>

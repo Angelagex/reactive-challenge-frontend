@@ -25,19 +25,13 @@ const ProviderItem: React.FunctionComponent<Provider> = ({
 
   return (
     <div className="productDiv">
-      <div className="productTopButtons">
-      </div>
+      <div className="productTopButtons"></div>
       <h2 className="productTitle">{name}</h2>
       <p className="productDescription">{providerId}</p>
       <div className="productLowButtons">
-      <button
-        className="buyMoreButton"
-        onClick={(e) => {
-          handleDelete;
-        }}
-      >
-        Delete
-      </button>
+        <button className="buyMoreButton" onClick={handleDelete}>
+          Delete
+        </button>
       </div>
     </div>
   );

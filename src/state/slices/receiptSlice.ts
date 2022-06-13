@@ -14,15 +14,7 @@ interface ReceiptState {
 }
 
 const initialState: ReceiptState = {
-    receipts: [
-        {
-            id: "test",
-            ReceiptproviderName: "test",
-            ReceiptproviderId: "test",
-            date: "2020-05-17",
-            order: []
-        }
-    ]
+    receipts: []
 }
 
 export const receiptSlice = createSlice({

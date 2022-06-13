@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Product, updateProductToReceipt } from "../../state/slices/productSlice";
-import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/Store";
 
@@ -29,7 +28,7 @@ const ItemInOffCavas: React.FunctionComponent<Product> = (product: Product) => {
 
   return (
     <div className="itemAmountDiv">
-      <p>You only can buy more</p>
+      <p>You only can buy {(Number(product.maxAmount) - localAmount)} more</p>
       <p className="itemNameDiv"> {product.name}</p>
       <div className="itemAmountButtonsDiv">
         <input
@@ -41,6 +40,7 @@ const ItemInOffCavas: React.FunctionComponent<Product> = (product: Product) => {
                 value={localAmount}
                 onChange={(e) => handleChange(e)}
                 min="1"
+                max={(Number(product.maxAmount) - localAmount) + 2}
                 required
               />
         <button onClick={handleUpdate}>Apply</button>
