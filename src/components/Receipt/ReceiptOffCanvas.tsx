@@ -5,34 +5,36 @@ import { useSelector } from "react-redux";
 import { Provider } from "../../state/slices/providerSlice";
 import { RootState } from "../../state/Store";
 import ItemInOffCavas from "./ItemInOffCanvas";
-import moment from 'moment';
+import moment from "moment";
 
 interface IOffCanvasProps {}
 
 const OffCanvas: React.FunctionComponent<IOffCanvasProps> = () => {
-  const [provider, setProvider] = React.useState("");
+  const [providerName, setProviderName] = React.useState("");
+  const [providerDocument, setProvider] = React.useState("");
+
   const [show, setShow] = React.useState(false);
   const providers = useSelector((state: RootState) => state.provider.providers);
   const products = useSelector((state: RootState) => state.product.receipt);
 
-  React.useEffect(() => {
-  }, [products])
-  
+  React.useEffect(() => {}, [products]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
-          e.preventDefault()
-          console.log(products);
-          console.log(moment().format("YYY/MM/DD"))
-  }
+    e.preventDefault();
+    console.log(products);
+    console.log(moment().format("YYY/MM/DD"));
+  };
 
   return (
     <>
       <GiNotebook
         onClick={handleShow}
         style={{ color: "white", fontSize: "1.5em" }}
+        onPointerEnter={(e) => (e.currentTarget.style.color = "#0d6efd")}
+        onPointerLeave={(e) => (e.currentTarget.style.color = "white")}
       />
       <Offcanvas
         show={show}
@@ -44,7 +46,7 @@ const OffCanvas: React.FunctionComponent<IOffCanvasProps> = () => {
           <Offcanvas.Title>New Receipt</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-        <form onSubmit={handleSave}>
+          <form onSubmit={handleSave}>
             <div className="inputFormDiv">
               <label className="formLabel">Select a provider</label>
               <select
@@ -62,13 +64,14 @@ const OffCanvas: React.FunctionComponent<IOffCanvasProps> = () => {
               </select>
             </div>
             <div className="offCanvasItemContainer">
-                {products.map( item => 
-                  <ItemInOffCavas {...item} />)}
+              {products.map((item, idx) => (
+                <ItemInOffCavas {...item} key={idx} />
+              ))}
             </div>
 
             <button>Create Receipt!</button>
-            </form>
-          </Offcanvas.Body>
+          </form>
+        </Offcanvas.Body>
       </Offcanvas>
     </>
   );

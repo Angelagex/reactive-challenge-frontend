@@ -5,6 +5,7 @@ import {
   Provider,
 } from "../../state/slices/providerSlice";
 import { RootState } from "../../state/Store";
+import ProviderItem from "./ProviderItem";
 
 interface IProviderListProps {}
 
@@ -21,21 +22,9 @@ const ProviderList: React.FunctionComponent<IProviderListProps> = () => {
   };
 
   return (
-    <div>
-      <h1>ProviderList</h1>
+    <div className="productList">
       {providers.map((provider, idx) => (
-        <div key={idx}>
-          <p>{provider.id}</p>
-          <p>{provider.name}</p>
-          <p>{provider.providerId}</p>
-          <button
-            onClick={(e) => {
-              handleDelete(provider);
-            }}
-          >
-            Delete
-          </button>
-        </div>
+        <ProviderItem {...provider} key={idx} />
       ))}
     </div>
   );

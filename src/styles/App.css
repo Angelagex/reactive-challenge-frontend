@@ -103,3 +103,10 @@
     padding: 13px 50px 13px;
   }
 }
+
+
+.linkLabel {
+  text-decoration: none;
+  margin-right: 20px;
+  color: aliceblue;
+}

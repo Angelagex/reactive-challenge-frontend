@@ -15,6 +15,8 @@ const OffCanvas: React.FunctionComponent<IOffCanvasProps> = () => {
       <GiShoppingCart
         onClick={handleShow}
         style={{ color: "white", fontSize: "1.5em" }}
+        onPointerEnter={(e) => (e.currentTarget.style.color = "#0d6efd")}
+        onPointerLeave={(e) => (e.currentTarget.style.color = "white")}
       />
       <Offcanvas
         show={show}

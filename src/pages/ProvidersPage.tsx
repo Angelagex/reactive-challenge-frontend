@@ -7,6 +7,7 @@ interface IProvidersPageProps {}
 const ProvidersPage: React.FunctionComponent<IProvidersPageProps> = () => {
   return (
     <div>
+      <h1>ProviderList</h1>
       <AddProviderForm />
       <ProviderList />
     </div>
